@@ -32,6 +32,9 @@ const scrapeAllTruckItem = async () => {
       baseUrl,
       item
     );
+    if (!result.success) {
+      continue;
+    }
     updateItem(item.id, result);
   }
 };
@@ -106,6 +109,7 @@ const start = async () => {
       };
     }
     console.log('All detail page scrape successful');
+    console.log(getAllItems());
   } catch (error) {
     // retry
     let maxRetryCount = 4;

@@ -66,29 +66,33 @@ export const scrapeTruckItem = async (
   baseUrl: string,
   item: Item
 ) => {
-  const url = item.href;
-  let html = await getHtml(baseUrl, url.replace(baseUrl, ''));
+  try {
+    const url = item.href;
+    let html = await getHtml(baseUrl, url.replace(baseUrl, ''));
 
-  const $ = cheerio.load(html);
+    const $ = cheerio.load(html);
 
-  const truckDetails: any = {};
+    const truckDetails: any = {};
 
-  //'main div.parametersArea div.offer-params.with-vin ul.offer-params__list li.offer-params__item';
+    //'main div.parametersArea div.offer-params.with-vin ul.offer-params__list li.offer-params__item';
 
-  $(pattern)
-    .map((_, element: cheerio.Element) => {
-      const key = $(element).find('span').text().trim();
-      const value = $(element).find('div').text().trim();
+    $(pattern)
+      .map((_, element: cheerio.Element) => {
+        const key = $(element).find('span').text().trim();
+        const value = $(element).find('div').text().trim();
 
-      const outKey = getValidKey(key, targetTruckDetailKeys);
+        const outKey = getValidKey(key, targetTruckDetailKeys);
 
-      if (outKey) {
-        truckDetails[outKey] = value;
-      }
-    })
-    .get();
+        if (outKey) {
+          truckDetails[outKey] = value;
+        }
+      })
+      .get();
 
-  return truckDetails;
+    return { success: true, data: truckDetails };
+  } catch (err) {
+    return { success: false, data: null };
+  }
 };
 
 export const getValidKey = (

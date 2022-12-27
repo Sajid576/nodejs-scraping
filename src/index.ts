@@ -33,9 +33,11 @@ const scrapeAllTruckItem = async () => {
       item
     );
     if (!result.success) {
+      console.log('item ', item.id, ' failed to update');
       continue;
     }
-    updateItem(item.id, result);
+    updateItem(item.id, result.data);
+    console.log('item ', item.id, ' updated');
   }
 };
 
@@ -67,7 +69,7 @@ const start = async () => {
       {
         name: 'price',
         type: 'text',
-        filterBy: 'div.e1b25f6f9.ooa-1w7uott-Text.eu5v0x0 span',
+        filterBy: 'div.e1b25f6f10.ooa-dsk6y6.er34gjf0 span',
       },
       {
         name: 'itemId',

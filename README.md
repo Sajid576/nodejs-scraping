@@ -14,7 +14,12 @@
 
 - `db-services` contains the core database interaction methods. Here, `Items` list is used as the database.
 
+- `index` file contains the business logic and retry logic.
+
 # Retry Strategies For Scraping
+
+- In this project, retry strategy is applied if any kind of exception occurs while scraping process or
+  if scrapper program fail to scrap all the items from all the pages.
 
 - We can crawl from multiple IP addresses and avoid IP bans and rate limits by using ProxyMesh's anonymous IP changer
   proxy that rotates IP addresses by hiding our IP address.

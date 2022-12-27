@@ -113,7 +113,7 @@ const start = async () => {
     console.log('All detail page scrape successful');
     console.log(getAllItems());
   } catch (error) {
-    // retry
+    // retry logic
     let maxRetryCount = 4;
     while (maxRetryCount) {
       console.log('Retry Remaining: ' + maxRetryCount);
